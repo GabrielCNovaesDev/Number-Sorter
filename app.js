@@ -6,14 +6,25 @@ function sortear(){
 
     let sorteados = [];
     let numero;
+    let quantidadeNumeros = ate - de;
+
+    if(de > ate){
+        alert("Verifique se os intervalos numéricos estão corretos! (O segundo campo deve ser menor que o terceiro)");
+        return ; // esse return vazio serve para que o código seja interrompido
+    }
 
     for(let i = 0;i < quantidade; i++){
         numero = obterNumeroAleatorio(de,ate); // não declarar variaveis dentro do loop
 
-        while(sorteados.includes(numero)){
-            numero = obterNumeroAleatorio(de,ate) // dentro do while eu posso armazenar variaveis
-        }
-        sorteados.push(numero);
+        if(quantidadeNumeros < sorteados.length){
+            alert("Coloque um intervalo de numeros maior!");
+            return ;
+        }else{
+            while(sorteados.includes(numero)){
+                numero = obterNumeroAleatorio(de,ate) // dentro do while eu posso armazenar variaveis
+            }
+            sorteados.push(numero);
+        }      
     }
 
     exibirNumerosSorteados(sorteados);
@@ -46,6 +57,7 @@ function alterarStatusBotao(){
         botao.classList.remove('container__botao');
     }
 }
+
 function reiniciar(){
     limparCampo();
     alterarStatusBotao();
